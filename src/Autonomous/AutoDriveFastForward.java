@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc.team6593.robot.commands;
+package Autonomous;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6593.robot.*;
 

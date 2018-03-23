@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team6593.robot.commands.TankDrive;
 import org.usfirst.frc.team6593.robot.subsystems.ClimbingLift;
 import org.usfirst.frc.team6593.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6593.robot.subsystems.Lift;
@@ -28,13 +29,17 @@ import org.usfirst.frc.team6593.robot.subsystems.Pneumatics;
  */
 public class Robot extends TimedRobot {
 	public static OI m_oi;
+	public static RobotMap robotMap;
 	
     public static Lift lifting;
 	public static ClimbingLift climbing;
 	public static PickUp pickuplift;
 	
-	public static final DriveTrain drivetrain = new DriveTrain();
+	
+	public static DriveTrain drivetrain;
 	public static final Pneumatics grab = new Pneumatics();
+	
+	
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,13 +50,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+		RobotMap.init();
+		// subsystem
 		lifting = new Lift();
 	    climbing = new ClimbingLift();
 	    pickuplift = new PickUp();
+	    drivetrain = new DriveTrain();
 		
 		
 		m_oi = new OI();
+		robotMap = new RobotMap();
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -110,10 +118,15 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		System.out.print("enabled");
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
@@ -125,6 +138,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**

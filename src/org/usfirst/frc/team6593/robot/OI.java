@@ -7,10 +7,24 @@
 
 package org.usfirst.frc.team6593.robot;
 
+import org.usfirst.frc.team6593.robot.commands.InvertLifting;
+import org.usfirst.frc.team6593.robot.commands.InvertPickUp;
 import org.usfirst.frc.team6593.robot.commands.Lifting;
+import org.usfirst.frc.team6593.robot.commands.PickUpLift;
+import org.usfirst.frc.team6593.robot.commands.SolenoidOff;
+import org.usfirst.frc.team6593.robot.commands.SolenoidOff2;
+import org.usfirst.frc.team6593.robot.commands.SolenoidReverse;
+import org.usfirst.frc.team6593.robot.commands.SolenoidReverse2;
+import org.usfirst.frc.team6593.robot.commands.StopLifting;
+import org.usfirst.frc.team6593.robot.commands.StopPickUp;
+import org.usfirst.frc.team6593.robot.commands.solenoidOn;
+import org.usfirst.frc.team6593.robot.commands.solenoidOn2;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,22 +59,79 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	public Joystick joystick = new Joystick(0);
+	//logitech extreme 3d
+	//public Joystick joystick = new Joystick(0);
 	
-	public int pov = joystick.getPOV(0);
+	//logitech f310
+	public Joystick joystick2 = new Joystick(0);
 	
-
-		
-
+	//logitech f310 button mapping 
+	public JoystickButton rightBumper;
+	public JoystickButton leftBumper;
+	public JoystickButton rightTrigger;
+	public JoystickButton leftTrigger;
+	public JoystickButton aButton;
+	public JoystickButton bButton;
+	public JoystickButton yButton;
+	public JoystickButton xButton;
+	public JoystickButton rightAxisButton;
+	public JoystickButton leftAxisButton;
 	
 	public OI() {
 		
-		if(pov == 0) {
-			
-			
-		}
+		// mapping f310
+		rightBumper = new JoystickButton(joystick2, 6);
+		rightBumper.whileHeld(new PickUpLift());
+		rightBumper.whenReleased(new StopPickUp());
+		
+		leftBumper = new JoystickButton(joystick2, 5);
+		leftBumper.whileHeld(new InvertPickUp());
+		leftBumper.whenReleased(new StopPickUp());
+		
+		rightTrigger = new JoystickButton(joystick2, 8);
+		rightTrigger.whileHeld(new Lifting());
+		rightTrigger.whenReleased(new StopLifting());
+		
+		leftTrigger = new JoystickButton(joystick2, 7);
+		leftTrigger.whileHeld(new InvertLifting());
+		leftTrigger.whenReleased(new StopLifting());
+		
+		aButton = new JoystickButton(joystick2, 2);
+		aButton.whenPressed(new solenoidOn2());
+		aButton.whenReleased(new SolenoidOff2());
+		
+		bButton = new JoystickButton(joystick2, 3);
+		bButton.whenPressed(new SolenoidReverse2());
+		bButton.whenReleased(new SolenoidOff2());
+		
+		yButton = new JoystickButton(joystick2, 4);
+		yButton.whenPressed(new SolenoidReverse());
+		yButton.whenReleased(new SolenoidOff());
+		
+		xButton = new JoystickButton(joystick2, 1);
+		xButton.whenPressed(new solenoidOn());
+		xButton.whenReleased(new SolenoidOff());
+		
+		rightAxisButton = new JoystickButton(joystick2, 12);
+		leftAxisButton = new JoystickButton(joystick2, 11);
+		
+		SmartDashboard.getNumber("axies", getDriveLeftSpeed());
+		
 		
 	}
+	
+	 public double getDriveLeftSpeed() {
+	    	return joystick2.getRawAxis(1);
+	    }
+	    
+	    public double getDriveRightSpeed() {
+	    	return joystick2.getRawAxis(5);
+	    }
+
+	    public Joystick getJoystick2() {
+	        return joystick2;
+	    }
+
 	
 	
 }

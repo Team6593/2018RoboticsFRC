@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
@@ -24,6 +26,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * floating around.
  */
 public class RobotMap {
+	
 	
 
 	
@@ -44,22 +47,33 @@ public class RobotMap {
 		
 	
 	// drivetrain controllers
-    public static SpeedController driveTrainrightSC = new Spark(0);
-    public static SpeedController driveTrainleftSC = new Spark(1);
+    public static SpeedController driveTrainrightSC;
+    public static SpeedController driveTrainleftSC;
     
     // controller for components
     public static SpeedController pickUpMech = new Spark(2);
     public static SpeedController liftingMech = new Spark(3);
 	public static SpeedController climbingMech = new Spark(4);
 	
-	//solenoid stuff
+	//pneumatics 
 	public static DoubleSolenoid dsolenoid = new DoubleSolenoid(4,5); 
 	public static DoubleSolenoid dsolenoid2 = new DoubleSolenoid(6,7);
 	public static Compressor mainCompressor = new Compressor(0);
 	
 	// robotdrive
-		public static DifferentialDrive drive = new DifferentialDrive(driveTrainleftSC, driveTrainrightSC );
-	//}
+	public static DifferentialDrive drive;
+	//
 	
 	
+	
+		public static void init() {
+			
+			driveTrainrightSC = new Spark(0);
+			driveTrainleftSC = new Spark(1);
+	
+			drive = new DifferentialDrive(driveTrainleftSC, driveTrainrightSC );
+			
+			
+			
+		}
 }

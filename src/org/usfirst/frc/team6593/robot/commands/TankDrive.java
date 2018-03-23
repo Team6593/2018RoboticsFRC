@@ -30,6 +30,10 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	//Robot.drivetrain.gyroTeleop(Robot.m_oi.joystick2);
+    	Robot.drivetrain._arcadeDrive(Robot.m_oi.joystick2);
+    
     
     }
 
