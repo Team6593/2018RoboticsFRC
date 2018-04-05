@@ -25,6 +25,7 @@ public class Pneumatics extends Subsystem {
 	public void startSolenoid2() {
 		solenoid2.set(DoubleSolenoid.Value.kForward);
 	}
+
 	public void reverseSolenoid() {
 		solenoid1.set(DoubleSolenoid.Value.kReverse);
 		
@@ -33,6 +34,8 @@ public class Pneumatics extends Subsystem {
 		solenoid2.set(DoubleSolenoid.Value.kReverse);
 	}
 	
+	
+	
 	public void stopSolenoid() {
 		solenoid1.set(DoubleSolenoid.Value.kOff);
 		
@@ -40,6 +43,7 @@ public class Pneumatics extends Subsystem {
 	public void stopSolenoid2() {
 		solenoid2.set(DoubleSolenoid.Value.kOff);
 	}
+	
 	public void startCompressor() {
 		compressor.start();
 	}

@@ -14,16 +14,16 @@ public class ClimbingLift extends Subsystem {
 	private final SpeedController climbMech = RobotMap.climbingMech; 
 
 	
-	 public void startRolling(double i){
+	 public void startClimbing(double i){
 	    		climbMech.set(i);
 	    }
 	    
-	    public void stopRolling(){
+	    public void stopClimbing(){
 	    	climbMech.set(0);
 	    }
 	    
-	    public void invertRolling(double i){
-	    	climbMech.set(i);
+	    public void invertClimbing(double i){
+	    	climbMech.set(-i);
 	    }
 	    
     // Put methods for controlling this subsystem

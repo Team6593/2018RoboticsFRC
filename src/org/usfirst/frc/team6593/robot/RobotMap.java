@@ -54,22 +54,30 @@ public class RobotMap {
     public static SpeedController pickUpMech = new Spark(2);
     public static SpeedController liftingMech = new Spark(3);
 	public static SpeedController climbingMech = new Spark(4);
+	public static SpeedController _holdUp = new Spark(5);
+	public static SpeedController lifting = new Spark(6);
 	
 	//pneumatics 
-	public static DoubleSolenoid dsolenoid = new DoubleSolenoid(4,5); 
-	public static DoubleSolenoid dsolenoid2 = new DoubleSolenoid(6,7);
+	public static DoubleSolenoid dsolenoid = new DoubleSolenoid(2,3); 
+	public static DoubleSolenoid dsolenoid2 = new DoubleSolenoid(0,1);
 	public static Compressor mainCompressor = new Compressor(0);
 	
 	// robotdrive
 	public static DifferentialDrive drive;
 	//
+
+	
+
+	
 	
 	
 	
 		public static void init() {
 			
-			driveTrainrightSC = new Spark(0);
-			driveTrainleftSC = new Spark(1);
+			Gyro = new ADXRS450_Gyro();
+			
+			driveTrainrightSC = new Spark(1);
+			driveTrainleftSC = new Spark(0);
 	
 			drive = new DifferentialDrive(driveTrainleftSC, driveTrainrightSC );
 			

@@ -24,6 +24,7 @@ public class DriveTrain extends Subsystem {
 	public static ADXRS450_Gyro gyro = RobotMap.Gyro;
 	private static final double kP = 0.03;
 	
+	
 	/*public void setSpeed(double speed_L, double speed_R){//two input speed control
 	   	leftSC.set(-speed_L);
 	   	rightSC.set(speed_R);
@@ -46,7 +47,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void _arcadeDrive(Joystick joy) {
-		_arcadeDrive(-joy.getY(), -joy.getZ());
+		_arcadeDrive(-joy.getY(), joy.getZ());
 	}
     
     public void straightDrive(double s) {
@@ -74,5 +75,14 @@ public class DriveTrain extends Subsystem {
 		
 		_drive.tankDrive(0, rot);
 	}
+	
+	public void setSpeed(double speed_L, double speed_R){//two input speed control
+	   	leftSC.set(-speed_L);
+	   	rightSC.set(speed_R);
+   	}
+   
+   	public void setSpeed(double speed){//one input speed control
+	   	setSpeed(speed, speed + .02);
+   	}
 }
 

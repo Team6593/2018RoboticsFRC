@@ -7,19 +7,28 @@
 
 package org.usfirst.frc.team6593.robot;
 
+import org.usfirst.frc.team6593.robot.commands.Climbing;
+import org.usfirst.frc.team6593.robot.commands.DoNothing;
+import org.usfirst.frc.team6593.robot.commands.HoldingUp;
+import org.usfirst.frc.team6593.robot.commands.InvertClimbing;
 import org.usfirst.frc.team6593.robot.commands.InvertLifting;
 import org.usfirst.frc.team6593.robot.commands.InvertPickUp;
+import org.usfirst.frc.team6593.robot.commands.LetDown;
 import org.usfirst.frc.team6593.robot.commands.Lifting;
 import org.usfirst.frc.team6593.robot.commands.PickUpLift;
 import org.usfirst.frc.team6593.robot.commands.SolenoidOff;
 import org.usfirst.frc.team6593.robot.commands.SolenoidOff2;
 import org.usfirst.frc.team6593.robot.commands.SolenoidReverse;
 import org.usfirst.frc.team6593.robot.commands.SolenoidReverse2;
+import org.usfirst.frc.team6593.robot.commands.StopClimbing;
 import org.usfirst.frc.team6593.robot.commands.StopLifting;
 import org.usfirst.frc.team6593.robot.commands.StopPickUp;
 import org.usfirst.frc.team6593.robot.commands.solenoidOn;
 import org.usfirst.frc.team6593.robot.commands.solenoidOn2;
 
+
+import Autonomous.AutoDriveBack;
+import Autonomous.AutoDriveFastForward;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.Sendable;
@@ -60,7 +69,7 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	//logitech extreme 3d
-	//public Joystick joystick = new Joystick(0);
+	public Joystick joystick = new Joystick(0);
 	
 	//logitech f310
 	public Joystick joystick2 = new Joystick(0);
@@ -76,6 +85,8 @@ public class OI {
 	public JoystickButton xButton;
 	public JoystickButton rightAxisButton;
 	public JoystickButton leftAxisButton;
+	public JoystickButton backButton;
+	public JoystickButton startButton;
 	
 	public OI() {
 		
@@ -112,10 +123,24 @@ public class OI {
 		xButton.whenPressed(new solenoidOn());
 		xButton.whenReleased(new SolenoidOff());
 		
+		backButton = new JoystickButton(joystick2, 9);
+		backButton.whenPressed(new Climbing());
+		backButton.whenReleased(new StopClimbing());
+		
+		startButton = new JoystickButton(joystick2, 10);
+		startButton.whenPressed(new InvertClimbing());
+		startButton.whenReleased(new StopClimbing());
+		
 		rightAxisButton = new JoystickButton(joystick2, 12);
 		leftAxisButton = new JoystickButton(joystick2, 11);
 		
-		SmartDashboard.getNumber("axies", getDriveLeftSpeed());
+		
+		
+		SmartDashboard.putData("AutoDrive", new AutoDriveBack(5));
+		SmartDashboard.getNumber("Joystick Y Value", joystick2.getY());
+		SmartDashboard.getNumber("Joystick Z Value", joystick2.getZ());
+
+		
 		
 		
 	}

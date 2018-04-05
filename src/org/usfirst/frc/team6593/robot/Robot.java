@@ -7,15 +7,23 @@
 
 package org.usfirst.frc.team6593.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team6593.robot.commands.TankDrive;
 import org.usfirst.frc.team6593.robot.subsystems.ClimbingLift;
 import org.usfirst.frc.team6593.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team6593.robot.subsystems.HoldUp;
 import org.usfirst.frc.team6593.robot.subsystems.Lift;
 import org.usfirst.frc.team6593.robot.subsystems.PickUp;
 import org.usfirst.frc.team6593.robot.subsystems.Pneumatics;
@@ -34,10 +42,12 @@ public class Robot extends TimedRobot {
     public static Lift lifting;
 	public static ClimbingLift climbing;
 	public static PickUp pickuplift;
+	public static HoldUp holdUp;
 	
 	
 	public static DriveTrain drivetrain;
 	public static final Pneumatics grab = new Pneumatics();
+	
 	
 	
 
@@ -56,6 +66,7 @@ public class Robot extends TimedRobot {
 	    climbing = new ClimbingLift();
 	    pickuplift = new PickUp();
 	    drivetrain = new DriveTrain();
+	    holdUp = new HoldUp();
 		
 		
 		m_oi = new OI();
@@ -63,6 +74,31 @@ public class Robot extends TimedRobot {
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		
+		new Thread(() -> {
+            UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+            camera.setResolution(640, 480);
+            camera.setFPS(30);
+            
+            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+            camera1.setResolution(640, 480);
+            camera1.setFPS(30);
+            
+            CvSink cvSink = CameraServer.getInstance().getVideo();
+            CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+            
+            Mat source = new Mat();
+            Mat output = new Mat();
+            
+            while(!Thread.interrupted()) {
+                cvSink.grabFrame(source);
+                Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+                outputStream.putFrame(output);
+            }
+            
+        }).start();
+		
 	}
 
 	/**

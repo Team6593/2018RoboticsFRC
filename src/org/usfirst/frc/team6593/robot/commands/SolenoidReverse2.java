@@ -31,6 +31,8 @@ public class SolenoidReverse2 extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.grab.stopSolenoid2();
+
     }
 
     // Called when another command which requires one or more of the same
