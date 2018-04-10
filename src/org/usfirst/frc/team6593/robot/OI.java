@@ -11,24 +11,26 @@ import org.usfirst.frc.team6593.robot.commands.Climbing;
 import org.usfirst.frc.team6593.robot.commands.DoNothing;
 import org.usfirst.frc.team6593.robot.commands.HoldingUp;
 import org.usfirst.frc.team6593.robot.commands.InvertClimbing;
-import org.usfirst.frc.team6593.robot.commands.InvertLifting;
+import org.usfirst.frc.team6593.robot.commands.InvertHoldUp;
 import org.usfirst.frc.team6593.robot.commands.InvertPickUp;
-import org.usfirst.frc.team6593.robot.commands.LetDown;
-import org.usfirst.frc.team6593.robot.commands.Lifting;
+
 import org.usfirst.frc.team6593.robot.commands.PickUpLift;
 import org.usfirst.frc.team6593.robot.commands.SolenoidOff;
 import org.usfirst.frc.team6593.robot.commands.SolenoidOff2;
 import org.usfirst.frc.team6593.robot.commands.SolenoidReverse;
 import org.usfirst.frc.team6593.robot.commands.SolenoidReverse2;
 import org.usfirst.frc.team6593.robot.commands.StopClimbing;
-import org.usfirst.frc.team6593.robot.commands.StopLifting;
+
 import org.usfirst.frc.team6593.robot.commands.StopPickUp;
 import org.usfirst.frc.team6593.robot.commands.solenoidOn;
 import org.usfirst.frc.team6593.robot.commands.solenoidOn2;
-
+import org.usfirst.frc.team6593.robot.commands.timedInvertRolling;
 
 import Autonomous.AutoDriveBack;
 import Autonomous.AutoDriveFastForward;
+import Autonomous.Sation1;
+import Autonomous.Sation2;
+import Autonomous.Sation3;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.Sendable;
@@ -87,6 +89,8 @@ public class OI {
 	public JoystickButton leftAxisButton;
 	public JoystickButton backButton;
 	public JoystickButton startButton;
+	public JoystickButton leftPress;
+	public JoystickButton rightPress;
 	
 	public OI() {
 		
@@ -100,12 +104,12 @@ public class OI {
 		leftBumper.whenReleased(new StopPickUp());
 		
 		rightTrigger = new JoystickButton(joystick2, 8);
-		rightTrigger.whileHeld(new Lifting());
-		rightTrigger.whenReleased(new StopLifting());
+		rightTrigger.whileHeld(new Climbing());
+		rightTrigger.whenReleased(new StopClimbing());
 		
 		leftTrigger = new JoystickButton(joystick2, 7);
-		leftTrigger.whileHeld(new InvertLifting());
-		leftTrigger.whenReleased(new StopLifting());
+		leftTrigger.whileHeld(new InvertClimbing());
+		leftTrigger.whenReleased(new StopClimbing());
 		
 		aButton = new JoystickButton(joystick2, 2);
 		aButton.whenPressed(new solenoidOn2());
@@ -124,22 +128,35 @@ public class OI {
 		xButton.whenReleased(new SolenoidOff());
 		
 		backButton = new JoystickButton(joystick2, 9);
-		backButton.whenPressed(new Climbing());
-		backButton.whenReleased(new StopClimbing());
+		backButton.whenPressed(new timedInvertRolling(2));
+		backButton.whenReleased(new DoNothing());
 		
 		startButton = new JoystickButton(joystick2, 10);
-		startButton.whenPressed(new InvertClimbing());
-		startButton.whenReleased(new StopClimbing());
+		startButton.whenPressed(new HoldingUp());
+		startButton.whenReleased(new DoNothing());
+		
+		//leftPress = new JoystickButton(joystick2, 11);
+		//leftPress.whenPressed(new HoldingUp());
+		//leftPress.whenReleased(new DoNothing());
+		
+		//rightPress = new JoystickButton(joystick2, 12);
+		//rightPress.whenPressed(new LetDown());
+		//rightPress.whenReleased(new DoNothing());
 		
 		rightAxisButton = new JoystickButton(joystick2, 12);
 		leftAxisButton = new JoystickButton(joystick2, 11);
 		
 		
-		
+		// putting Autonomous commands in smartdashboard or shuffle.
 		SmartDashboard.putData("AutoDrive", new AutoDriveBack(5));
+		SmartDashboard.putData("Sation 1", new Sation1());
+		SmartDashboard.putData("Sation 2", new Sation2());
+		SmartDashboard.putData("Sation 3", new Sation3());
+		
+		// Putting information for other components and functions. 
 		SmartDashboard.getNumber("Joystick Y Value", joystick2.getY());
 		SmartDashboard.getNumber("Joystick Z Value", joystick2.getZ());
-
+		
 		
 		
 		

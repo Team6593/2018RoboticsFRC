@@ -18,11 +18,11 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private final SpeedController rightSC = RobotMap.driveTrainrightSC;
-	private final SpeedController leftSC = RobotMap.driveTrainleftSC;
+	private final SpeedController rightSC = RobotMap.rightside;
+	private final SpeedController leftSC = RobotMap.leftside;
 	private final DifferentialDrive _drive = RobotMap.drive;
-	public static ADXRS450_Gyro gyro = RobotMap.Gyro;
-	private static final double kP = 0.03;
+	//public static ADXRS450_Gyro gyro = RobotMap.Gyro;
+	//private static final double kP = 0.03;
 	
 	
 	/*public void setSpeed(double speed_L, double speed_R){//two input speed control
@@ -47,7 +47,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void _arcadeDrive(Joystick joy) {
-		_arcadeDrive(-joy.getY(), joy.getZ());
+		_arcadeDrive(-joy.getY() * .45, joy.getZ());
+		
 	}
     
     public void straightDrive(double s) {
@@ -58,14 +59,6 @@ public class DriveTrain extends Subsystem {
 	            _drive.tankDrive(speed, -speeds);
 	}
 	
-    
-    public void gyroTeleop(Joystick joystick){
-		gyro.reset();
-		double angle = gyro.getAngle();
-		_drive.tankDrive(joystick.getY(), -angle*kP/*turningValue*/);
-		Timer.delay(0.004);
-		
-	}
     
     public void stopDrive() {
     	_drive.stopMotor();
@@ -82,7 +75,7 @@ public class DriveTrain extends Subsystem {
    	}
    
    	public void setSpeed(double speed){//one input speed control
-	   	setSpeed(speed, speed + .02);
+	   	setSpeed(speed, speed);
    	}
 }
 

@@ -28,6 +28,8 @@ import org.usfirst.frc.team6593.robot.subsystems.Lift;
 import org.usfirst.frc.team6593.robot.subsystems.PickUp;
 import org.usfirst.frc.team6593.robot.subsystems.Pneumatics;
 
+import Autonomous.Sation1;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
 	public static PickUp pickuplift;
 	public static HoldUp holdUp;
 	
+	public static Sation1 sat1;
 	
 	public static DriveTrain drivetrain;
 	public static final Pneumatics grab = new Pneumatics();
@@ -72,17 +75,18 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		robotMap = new RobotMap();
 		
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addDefault("My Auto", new Sation1());
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		
 		new Thread(() -> {
             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-            camera.setResolution(640, 480);
+            camera.setResolution(320, 240);
             camera.setFPS(30);
             
             UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-            camera1.setResolution(640, 480);
+            camera1.setResolution(320, 240);
             camera1.setFPS(30);
             
             CvSink cvSink = CameraServer.getInstance().getVideo();
@@ -130,6 +134,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
+		
+		//sat1 = new Sation1();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

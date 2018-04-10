@@ -12,7 +12,7 @@ public class PickUp extends Subsystem {
 	private final SpeedController pickUpMech = RobotMap.pickUpMech;
 	
 	 public void startRolling(double i){
-	    		pickUpMech.set(i);
+		 pickUpMech.set(i);
 	    }
 	    
 	    public void stopRolling(){
@@ -20,7 +20,7 @@ public class PickUp extends Subsystem {
 	    }
 	    
 	    public void invertRolling(double i){
-	    	pickUpMech.set(i);
+	    	pickUpMech.set(-i);
 	    }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

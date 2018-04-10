@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -48,14 +50,32 @@ public class RobotMap {
 	
 	// drivetrain controllers
     public static SpeedController driveTrainrightSC;
+    public static SpeedController driveTrainrightSC2;
+    public static SpeedControllerGroup leftside;
+    
     public static SpeedController driveTrainleftSC;
+    public static SpeedController driveTrainleftSC2;
+    public static SpeedControllerGroup rightside;
     
     // controller for components
     public static SpeedController pickUpMech = new Spark(2);
+    
+    
+    //public static SpeedController pickUpMech2 = new Spark(0);
+    //public static SpeedControllerGroup pickUp = new SpeedControllerGroup(pickUpMech, pickUpMech2);
+    
     public static SpeedController liftingMech = new Spark(3);
+    public static SpeedController liftingMech2 =  new Spark(7);
+    //public static SpeedControllerGroup lifting = new SpeedControllerGroup(liftingMech, liftingMech2);
+
 	public static SpeedController climbingMech = new Spark(4);
+    public static SpeedController climbingMech2 = new Spark(6);
+    public static SpeedControllerGroup climbing = new SpeedControllerGroup(climbingMech, climbingMech2);
+    public static SpeedControllerGroup climbing2 = new SpeedControllerGroup(liftingMech, liftingMech2);
+
+
 	public static SpeedController _holdUp = new Spark(5);
-	public static SpeedController lifting = new Spark(6);
+	//public static SpeedController lifting = new Spark(6);
 	
 	//pneumatics 
 	public static DoubleSolenoid dsolenoid = new DoubleSolenoid(2,3); 
@@ -76,10 +96,17 @@ public class RobotMap {
 			
 			Gyro = new ADXRS450_Gyro();
 			
+			
 			driveTrainrightSC = new Spark(1);
+			driveTrainrightSC2 = new Spark(9);
+			rightside = new SpeedControllerGroup(driveTrainrightSC, driveTrainrightSC2);
+			
 			driveTrainleftSC = new Spark(0);
+			driveTrainleftSC2 = new Spark(8);
+			leftside = new SpeedControllerGroup(driveTrainleftSC, driveTrainleftSC2);
+
 	
-			drive = new DifferentialDrive(driveTrainleftSC, driveTrainrightSC );
+			drive = new DifferentialDrive(leftside, rightside );
 			
 			
 			

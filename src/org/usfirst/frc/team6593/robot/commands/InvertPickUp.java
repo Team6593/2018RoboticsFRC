@@ -21,7 +21,7 @@ public class InvertPickUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pickuplift.startRolling(-.5);
+    	Robot.pickuplift.startRolling(-.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()

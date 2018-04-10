@@ -21,7 +21,7 @@ public class InvertClimbing extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climbing.startClimbing(-.5);
+    	Robot.climbing.startClimbing(-.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
