@@ -19,16 +19,16 @@ public class HoldUp extends Subsystem {
 
 	
 	 public void startRolling(double i){
-	    	holdUp.set(i);
+	    	holdUp.set(-i);
 	    }
 	    
 	    public void stopRolling(){
-	    	holdUp.set(0);
+	    	//holdUp.set(0);
 	    	holdUp.stopMotor();
 	    }
 	    
 	    public void invertRolling(double i){
-	    	holdUp.set(-i);
+	    	holdUp.set(i);
 	    }
 	    
     public void initDefaultCommand() {

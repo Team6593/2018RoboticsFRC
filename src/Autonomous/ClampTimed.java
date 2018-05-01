@@ -1,18 +1,18 @@
-package org.usfirst.frc.team6593.robot.commands;
+package Autonomous;
 
 import org.usfirst.frc.team6593.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class InvertClimbing extends Command {
+public class ClampTimed extends TimedCommand {
 
-    public InvertClimbing() {
+    public ClampTimed(double timeout) {
+        super(timeout);
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.climbing);
+        requires(Robot.grab);
     }
 
     // Called just before this Command runs the first time
@@ -21,17 +21,12 @@ public class InvertClimbing extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climbing.startClimbing(-.2);
+    	Robot.grab.startSolenoid();
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
-    	
+    	Robot.grab.stopSolenoid();
     }
 
     // Called when another command which requires one or more of the same

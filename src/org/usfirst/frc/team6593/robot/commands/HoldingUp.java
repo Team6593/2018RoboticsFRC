@@ -23,7 +23,7 @@ public class HoldingUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.holdUp.startRolling(1);
+    	Robot.holdUp.invertRolling(.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()

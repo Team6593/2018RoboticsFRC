@@ -2,6 +2,11 @@ package Autonomous;
 
 import org.usfirst.frc.team6593.robot.Robot;
 import org.usfirst.frc.team6593.robot.commands.InvertHoldUp;
+import org.usfirst.frc.team6593.robot.commands.PickUpLift;
+import org.usfirst.frc.team6593.robot.commands.solenoidOn;
+import org.usfirst.frc.team6593.robot.commands.solenoidOn2;
+
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -28,9 +33,17 @@ public class Sation1 extends CommandGroup {
         // arm.
     	//addSequential(new solenoidOn());
     	
-    	addParallel(new AutoDriveFastForward(4));
-    	addSequential(new InvertHoldUp());
+    	//addParallel(new AutoDriveFastForward(4));
+    	//addSequential(new InvertHoldUp());
     	//addSequential(new AutoRotate(4));
+    	
+    	addSequential(new AutoDriveFastForward(3.5));
+    	addSequential(new ExtendPistonTimed(1.5));
+    	addSequential(new ClampTimed(1.5));
+    	addParallel(new AutoDriveBack(2));
+    	addSequential(new PickUpLiftTimed(3.5));
+    	addSequential(new AutoRotate(5));
+    	
     	
     	requires(Robot.drivetrain);
     	requires(Robot.lifting);

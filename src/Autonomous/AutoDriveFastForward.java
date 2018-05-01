@@ -33,7 +33,8 @@ public class AutoDriveFastForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankDrive(.7, .7);
+    	//Robot.drivetrain.tankDrive(-.5, -.5);
+    	Robot.drivetrain.setSpeed(.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()

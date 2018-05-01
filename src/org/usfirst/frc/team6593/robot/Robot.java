@@ -82,11 +82,11 @@ public class Robot extends TimedRobot {
 		
 		new Thread(() -> {
             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-            camera.setResolution(320, 240);
+            camera.setResolution(640, 480);
             camera.setFPS(30);
             
             UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-            camera1.setResolution(320, 240);
+            camera1.setResolution(640, 480);
             camera1.setFPS(30);
             
             CvSink cvSink = CameraServer.getInstance().getVideo();
@@ -174,7 +174,7 @@ public class Robot extends TimedRobot {
 		}
 	}
 
-	/**
+	/**`
 	 * This function is called periodically during operator control.
 	 */
 	@Override

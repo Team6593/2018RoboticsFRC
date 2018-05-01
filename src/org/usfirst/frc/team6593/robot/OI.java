@@ -71,7 +71,7 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	//logitech extreme 3d
-	public Joystick joystick = new Joystick(0);
+	public Joystick joystick = new Joystick(1);
 	
 	//logitech f310
 	public Joystick joystick2 = new Joystick(0);
@@ -128,11 +128,11 @@ public class OI {
 		xButton.whenReleased(new SolenoidOff());
 		
 		backButton = new JoystickButton(joystick2, 9);
-		backButton.whenPressed(new timedInvertRolling(2));
+		backButton.whenPressed(new InvertHoldUp());
 		backButton.whenReleased(new DoNothing());
 		
 		startButton = new JoystickButton(joystick2, 10);
-		startButton.whenPressed(new HoldingUp());
+		startButton.whenPressed(new HoldingUp()); // Actually going in other way 
 		startButton.whenReleased(new DoNothing());
 		
 		//leftPress = new JoystickButton(joystick2, 11);

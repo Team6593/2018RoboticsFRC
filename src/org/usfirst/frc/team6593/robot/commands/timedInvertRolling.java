@@ -19,7 +19,7 @@ public class timedInvertRolling extends TimedCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.holdUp.invertRolling(.2);
+    	Robot.holdUp.invertRolling(-.5);
     }
 
     // Called repeatedly when this Command is scheduled to run

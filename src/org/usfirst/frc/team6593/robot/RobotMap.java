@@ -32,7 +32,7 @@ public class RobotMap {
 	
 
 	
- 
+	//sensor
     
     public static ADXRS450_Gyro Gyro;
 
@@ -47,7 +47,7 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	//public void init() {
 		
-	
+    
 	// drivetrain controllers
     public static SpeedController driveTrainrightSC;
     public static SpeedController driveTrainrightSC2;
@@ -58,20 +58,20 @@ public class RobotMap {
     public static SpeedControllerGroup rightside;
     
     // controller for components
-    public static SpeedController pickUpMech = new Spark(2);
+    public static SpeedController pickUpMech = new Spark(4);
     
     
     //public static SpeedController pickUpMech2 = new Spark(0);
     //public static SpeedControllerGroup pickUp = new SpeedControllerGroup(pickUpMech, pickUpMech2);
     
-    public static SpeedController liftingMech = new Spark(3);
-    public static SpeedController liftingMech2 =  new Spark(7);
+    //public static SpeedController liftingMech = new Spark(3);
+   // public static SpeedController liftingMech2 =  new Spark(7);
     //public static SpeedControllerGroup lifting = new SpeedControllerGroup(liftingMech, liftingMech2);
 
-	public static SpeedController climbingMech = new Spark(4);
-    public static SpeedController climbingMech2 = new Spark(6);
+	public static SpeedController climbingMech = new Spark(6);
+    public static SpeedController climbingMech2 = new Spark(7);
     public static SpeedControllerGroup climbing = new SpeedControllerGroup(climbingMech, climbingMech2);
-    public static SpeedControllerGroup climbing2 = new SpeedControllerGroup(liftingMech, liftingMech2);
+   // public static SpeedControllerGroup climbing2 = new SpeedControllerGroup(liftingMech, liftingMech2);
 
 
 	public static SpeedController _holdUp = new Spark(5);
@@ -97,12 +97,12 @@ public class RobotMap {
 			Gyro = new ADXRS450_Gyro();
 			
 			
-			driveTrainrightSC = new Spark(1);
-			driveTrainrightSC2 = new Spark(9);
+			driveTrainrightSC = new Spark(0);
+			driveTrainrightSC2 = new Spark(1);
 			rightside = new SpeedControllerGroup(driveTrainrightSC, driveTrainrightSC2);
 			
-			driveTrainleftSC = new Spark(0);
-			driveTrainleftSC2 = new Spark(8);
+			driveTrainleftSC = new Spark(2);
+			driveTrainleftSC2 = new Spark(3);
 			leftside = new SpeedControllerGroup(driveTrainleftSC, driveTrainleftSC2);
 
 	
